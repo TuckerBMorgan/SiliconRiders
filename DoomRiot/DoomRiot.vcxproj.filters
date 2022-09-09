@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Runes">
+      <UniqueIdentifier>{a3988918-718d-45b2-9199-486e7402962e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Runes">
+      <UniqueIdentifier>{ce75146f-31ee-40af-8ee1-1766a5e0b58a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Minion.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Minion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="NetworkingThread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DealCard.cpp">
+      <Filter>Source Files\Runes</Filter>
+    </ClCompile>
+    <ClCompile Include="StartGame.cpp">
+      <Filter>Source Files\Runes</Filter>
+    </ClCompile>
+    <ClCompile Include="SetMana.cpp">
+      <Filter>Source Files\Runes</Filter>
+    </ClCompile>
+    <ClCompile Include="SetBaseMana.cpp">
+      <Filter>Source Files\Runes</Filter>
+    </ClCompile>
+    <ClCompile Include="ReportMinionToClient.cpp">
+      <Filter>Source Files\Runes</Filter>
+    </ClCompile>
+    <ClCompile Include="NewController.cpp">
+      <Filter>Source Files\Runes</Filter>
+    </ClCompile>
+    <ClCompile Include="Mulligan.cpp">
+      <Filter>Source Files\Runes</Filter>
+    </ClCompile>
+    <ClCompile Include="RotateTurn.cpp">
+      <Filter>Source Files\Runes</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionRune.cpp">
+      <Filter>Source Files\Runes</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="json.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="NetworkingThread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DealCard.h">
+      <Filter>Header Files\Runes</Filter>
+    </ClInclude>
+    <ClInclude Include="Mulligan.h">
+      <Filter>Header Files\Runes</Filter>
+    </ClInclude>
+    <ClInclude Include="NewController.h">
+      <Filter>Header Files\Runes</Filter>
+    </ClInclude>
+    <ClInclude Include="ReportMinionToClient.h">
+      <Filter>Header Files\Runes</Filter>
+    </ClInclude>
+    <ClInclude Include="Rune.h">
+      <Filter>Header Files\Runes</Filter>
+    </ClInclude>
+    <ClInclude Include="SetBaseMana.h">
+      <Filter>Header Files\Runes</Filter>
+    </ClInclude>
+    <ClInclude Include="SetMana.h">
+      <Filter>Header Files\Runes</Filter>
+    </ClInclude>
+    <ClInclude Include="StartGame.h">
+      <Filter>Header Files\Runes</Filter>
+    </ClInclude>
+    <ClInclude Include="RuneVM.h">
+      <Filter>Header Files\Runes</Filter>
+    </ClInclude>
+    <ClInclude Include="RotateTurn.h">
+      <Filter>Header Files\Runes</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionRune.h">
+      <Filter>Header Files\Runes</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

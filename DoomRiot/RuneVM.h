@@ -1,0 +1,11 @@
+#pragma once
+#include "Rune.h"
+#include "NewController.h"
+#include "ReportMinionToClient.h"
+#include "DealCard.h"
+#include "Mulligan.h"
+#include "StartGame.h"
+#include "SetBaseMana.h"
+#include "SetMana.h"
+#include "RotateTurn.h"
+#include "OptionRune.h"
