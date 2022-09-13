@@ -18,6 +18,8 @@
 #include "Controller.h"
 #include "NetworkingThread.h"
 #include "RuneVM.h"
+#include <SDL_ttf.h>
+
 
 using json = nlohmann::json;
 
@@ -67,37 +69,74 @@ Rune* process_message(json message) {
     return nullptr;
 }
 
+struct NumericalGlyph {
+    SDL_Texture* texture;
+    int width;
+    int height;
+};
+
+
 int main(int argc, char* argv[])
 {
     int width = 1280;
     int height = 720;
 
+    TTF_Init();
     SDL_Init(SDL_INIT_VIDEO);
     SDL_Window* window = SDL_CreateWindow("SDL pixels", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, SDL_WINDOW_SHOWN);
     SDL_Surface* screen = SDL_GetWindowSurface(window);
     SDL_Surface* pixels = SDL_CreateRGBSurfaceWithFormat(0, width, height, 32, SDL_PIXELFORMAT_RGBX8888);
+    auto test = SDL_LoadBMP("./card_border.bmp");
+    auto renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    auto newTexture = SDL_CreateTextureFromSurface(renderer, test);
 
+
+    auto gFont = TTF_OpenFont("C:/Users/Tucker/source/repos/DoomRiot/DoomRiot/Resources/fonts/BauhausRegular.ttf", 28);
+
+    SDL_FreeSurface(test);
     std::mutex message_channel_lock;
     std::queue<json> message_channel;
 
     std::mutex to_server_channel_lock;
     std::queue<json> to_server_message_channel;
-    
+
     auto shrd_ptr_for_channel = std::make_shared<std::queue<json>>(message_channel);
     auto shrd_ptr_for_to_server_channel = std::make_shared<std::queue<json>>(to_server_message_channel);
     ThreadParameters thread_params(message_channel_lock, shrd_ptr_for_channel, to_server_channel_lock, shrd_ptr_for_to_server_channel);
 
     std::thread thread_object(network_thread, thread_params);
-    
-    
+
+
     GameState the_game_state = GameState();
 
-    unsigned int t1 = SDL_GetTicks(); 
+    unsigned int t1 = SDL_GetTicks();
     auto ptr = std::make_shared<GameState>(the_game_state);
     std::queue<json> messages;
 
     float pos = 0;
     std::queue<json> to_server_messages;
+
+    SDL_Color textColor;
+    textColor.r = 0;
+    textColor.g = 255;
+    textColor.b = 0;
+    textColor.a = 255;
+
+
+    std::vector<NumericalGlyph> numerical_glyphs;
+    for (int i = 0; i < 10;i++) {
+        SDL_Surface* mana_text = TTF_RenderText_Solid(gFont, std::to_string(i).c_str(), textColor);
+        auto mTexture = SDL_CreateTextureFromSurface(renderer, mana_text);
+        NumericalGlyph glyph;
+        glyph.texture = mTexture;
+        glyph.height = mana_text->h;
+        glyph.width = mana_text->w;
+        numerical_glyphs.push_back(glyph);
+        SDL_FreeSurface(mana_text);
+    }
+    SDL_Rect text_rect;
+
+
     for (;;)
     {
         SDL_Event ev;
@@ -149,36 +188,93 @@ int main(int argc, char* argv[])
 
         unsigned int t2 = SDL_GetTicks();
         float delta = (t2 - t1) / 1000.0f;
+        
         t1 = t2;
 
         // clear pixels to black background
-        SDL_FillRect(pixels, NULL, 0);
+        SDL_RenderClear(renderer);
 
-        // write the pixels
-        SDL_LockSurface(pixels);
-        {
-            int pitch = pixels->pitch;
-
-            // move 100 pixels/second
-            pos += delta * 100.0f;
-            pos = fmodf(pos, width);
-
-            // draw red diagonal line
-            for (int i = 0; i < height; i++)
-            {
-                int y = i;
-                int x = ((int)pos + i) % width;
-
-                unsigned int* row = (unsigned int*)((char*)pixels->pixels + pitch * y);
-                row[x] = 0xff0000ff; // 0xAABBGGRR
-            }
-        }
-        SDL_UnlockSurface(pixels);
-
+        //SDL_BlitSurface(gHelloWorld, NULL, gScreenSurface, NULL);
         // copy to window
-        SDL_BlitSurface(pixels, NULL, screen, NULL);
-        SDL_UpdateWindowSurface(window);
+        SDL_Rect src_rect;
+        src_rect.x = 0;
+        src_rect.y = 0;
+        src_rect.w = 347;
+        src_rect.h = 627;
+
+        SDL_Rect dest_rect;
+        dest_rect.x = 0;
+        dest_rect.y = 0;
+        dest_rect.w = 347 / 2.0;
+        dest_rect.h = 627 / 2.0;
+
+
+        auto local_player = ptr->GetLocalPlayer();
+
+        if (local_player != nullptr) {
+
+
+            auto in_hand_ids = local_player->GetHandIds();
+            for (int i = 0; i < in_hand_ids.size();i++) {
+
+
+                auto minion_ptr = ptr->GetMinionFromUID(in_hand_ids[i]);
+
+                auto attack = minion_ptr->GetCurrentAttack();
+                auto health = minion_ptr->GetCurrentHealth();
+
+
+                SDL_RenderCopy(renderer, newTexture, &src_rect, &dest_rect);
+                
+                SDL_Surface* textSurface = TTF_RenderText_Solid(gFont, minion_ptr->GetName().c_str(), textColor);
+                auto mTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+
+                auto numerical_glyph = numerical_glyphs[attack];
+                text_rect.x = dest_rect.x + 10;
+                text_rect.y = dest_rect.y;
+                text_rect.w = textSurface->w;
+                text_rect.h = textSurface->h;
+                
+                SDL_RenderCopy(renderer, mTexture, NULL, &text_rect);
+                text_rect.y = (627 / 2.0) - numerical_glyph.height;
+                text_rect.w = numerical_glyph.width;
+                text_rect.h = numerical_glyph.height;
+
+                SDL_RenderCopy(renderer, numerical_glyph.texture, NULL, &text_rect);
+
+                numerical_glyph = numerical_glyphs[health];
+                SDL_RenderCopy(renderer, mTexture, NULL, &text_rect);
+                text_rect.x = dest_rect.x + (347.0 / 2.0) - numerical_glyph.width;
+                text_rect.w = numerical_glyph.width;
+                text_rect.h = numerical_glyph.height;
+
+                SDL_RenderCopy(renderer, numerical_glyph.texture, NULL, &text_rect);
+
+                dest_rect.x += (347.0 / 2.0);
+            }
+
+
+
+            int current_mana = local_player->GetCurrentMana();
+            int start_end = width - 10;
+            int summed_shift = 0;
+            do {
+                auto digit = numerical_glyphs[current_mana % 10];
+                SDL_Rect text_rect;
+                text_rect.x = start_end - digit.width;
+                text_rect.y = height - digit.height;
+                text_rect.w = digit.width;
+                text_rect.h = digit.height;
+
+                SDL_RenderCopy(renderer, numerical_glyphs[current_mana % 10].texture, NULL, &text_rect);
+                current_mana = current_mana / 10;
+            } while (current_mana > 0);
+        }
+ 
+        SDL_RenderPresent(renderer);
+        //SDL_UpdateWindowSurface(window);
     }
 
+    TTF_Quit();
     thread_object.join();
 }

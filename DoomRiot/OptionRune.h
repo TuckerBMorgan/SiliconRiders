@@ -23,7 +23,7 @@ public:
     OptionRune(json blob) {
         auto& options = blob["options"];
         for (auto& option : options) {
-            this->options.push_back(Option(option));
+            this->options.push_back(Option(option)); 
         }
     };
     void execute_rune(std::shared_ptr<class GameState> game_State) override;

@@ -66,6 +66,9 @@
     <ClCompile Include="OptionRune.cpp">
       <Filter>Source Files\Runes</Filter>
     </ClCompile>
+    <ClCompile Include="SetCurrentController.cpp">
+      <Filter>Source Files\Runes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="json.hpp">
@@ -113,5 +116,16 @@
     <ClInclude Include="OptionRune.h">
       <Filter>Header Files\Runes</Filter>
     </ClInclude>
+    <ClInclude Include="SetCurrentController.h">
+      <Filter>Header Files\Runes</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="card_border.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

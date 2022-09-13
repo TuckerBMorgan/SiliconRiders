@@ -14,7 +14,7 @@ void GameState::AddMinion(Minion minion) {
 }
 
 void GameState::DealMinion(unsigned int minion_id, unsigned int controller_id) {
-	for (auto controller : this->controllers) {
+	for (auto& controller : this->controllers) {
 		if (controller.ControllerId() == controller_id) {
 			controller.MoveMinionToHandFromDeck(minion_id);
 		}
@@ -39,15 +39,22 @@ void GameState::Tick(std::queue<json>& to_server_message) {
 	}
 	switch (local_player->GetControllerState())
 	{
-	case EControllerState::InMulligan:
-	{
+		case EControllerState::InMulligan:
+		{
 
-		json mulligan_message;
-		mulligan_message["message_type"] = "mulligan";
-		mulligan_message["index"] = json::array({});
-		to_server_message.push(mulligan_message);
-		local_player->SetControllerState(EControllerState::Waiting);
-	}
+			json mulligan_message;
+			mulligan_message["message_type"] = "mulligan";
+			mulligan_message["index"] = json::array({});
+			to_server_message.push(mulligan_message);
+			local_player->SetControllerState(EControllerState::InTurn);
+		}
+		break;
+		case EControllerState::InTurn:
+		{
+			if (local_player->HasOptions()) {
+				//
+			}
+		}
 		break;
 	default:
 		break;

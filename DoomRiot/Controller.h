@@ -48,4 +48,17 @@ public:
 	void SetCurrentOptions(std::vector<Option> options) {
 		this->current_options = options;
 	}
+	bool HasOptions() {
+		return this->current_options.size() > 0;
+	}
+	std::vector<unsigned int> GetHandIds() {
+		std::vector<unsigned int> new_vector;
+		for (auto id : this->in_hand) {
+			new_vector.push_back(id);
+		}
+		return new_vector;
+	}
+	int GetCurrentMana() {
+		return this->current_mana;
+	}
 };

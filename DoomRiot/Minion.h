@@ -51,5 +51,17 @@ public:
 		total_health(total_health),
 		controlled_uid(controlled_uid)
 	{};
-	unsigned int UID() { return this->uid; };
+	unsigned int UID() const { return this->uid; };
+
+	std::string GetName() const {
+		return this->display_name;
+	};
+
+	int GetCurrentAttack() const {
+		return this->current_attack;
+	};
+
+	int GetCurrentHealth() const {
+		return this->current_health;
+	};
 };
