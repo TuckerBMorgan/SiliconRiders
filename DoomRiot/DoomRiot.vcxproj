@@ -165,6 +165,7 @@
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DealCard.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Minion.cpp" />
     <ClCompile Include="Minion.h" />
@@ -190,6 +191,7 @@
     <ClInclude Include="DealCard.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="json.hpp" />
+    <ClInclude Include="Log.h" />
     <ClInclude Include="Mulligan.h" />
     <ClInclude Include="NetworkingThread.h" />
     <ClInclude Include="NewController.h" />

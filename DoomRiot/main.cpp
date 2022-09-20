@@ -23,6 +23,8 @@
 #include "RuneVM.h"
 #include "RenderCarePackage.h"
 #include "CardDisplay.h"
+#include "Log.h"
+
 
 using json = nlohmann::json;
 
@@ -163,7 +165,9 @@ int main(int argc, char* argv[])
     SDL_Surface* screen = SDL_GetWindowSurface(window);
     SDL_Surface* pixels = SDL_CreateRGBSurfaceWithFormat(0, width, height, 32, SDL_PIXELFORMAT_RGBX8888);
     auto test = SDL_LoadBMP("./card_border.bmp");
+    Log log;
 
+    log.PrintLogMessage("Hello WOrld", 100);
 
     auto renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     auto newTexture = SDL_CreateTextureFromSurface(renderer, test);
@@ -520,7 +524,7 @@ int main(int argc, char* argv[])
 
         border_corner_dest.y = 212;
         SDL_RenderCopy(render_care_package.GetRenderer(), battlefield_break_texture, &border_corner, &border_corner_dest);
-
+        log.Render(&render_care_package);
         SDL_RenderPresent(renderer);
     }
 
