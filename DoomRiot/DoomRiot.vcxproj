@@ -85,6 +85,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <VcpkgInstalledDir>
+    </VcpkgInstalledDir>
+    <VcpkgUseStatic>true</VcpkgUseStatic>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnabled>true</VcpkgEnabled>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -126,12 +134,13 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\Tucker\source\repos\DoomRiot\Deps\SDL2\include;C:\Users\Tucker\source\repos\DoomRiot\Deps\SDL2_ttf-2.20.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Tucker\source\repos\DoomRiot\Deps\SDL2\lib\x64;C:\Users\Tucker\source\WickedEngine\BUILD\x64\Debug;C:\Users\Tucker\source\repos\DoomRiot\Deps\SDL2_ttf-2.20.1\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\Tucker\source\repos\DoomRiot\Deps\SDL2\lib\x64;C:\Users\Tucker\source\repos\DoomRiot\Deps\SDL2_ttf-2.20.1\lib\x64;C:\Users\Tucker\source\repos\DoomRiot\Deps\quiche\target\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;quiche.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -151,6 +160,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AddTag.cpp" />
+    <ClCompile Include="CardDisplay.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="DealCard.cpp" />
     <ClCompile Include="GameState.cpp" />
@@ -161,14 +172,20 @@
     <ClCompile Include="NetworkingThread.cpp" />
     <ClCompile Include="NewController.cpp" />
     <ClCompile Include="OptionRune.cpp" />
+    <ClCompile Include="PlayCard.cpp" />
+    <ClCompile Include="PlayMinion.cpp" />
+    <ClCompile Include="RenderCarePackage.cpp" />
     <ClCompile Include="ReportMinionToClient.cpp" />
     <ClCompile Include="RotateTurn.cpp" />
     <ClCompile Include="SetBaseMana.cpp" />
     <ClCompile Include="SetCurrentController.cpp" />
     <ClCompile Include="SetMana.cpp" />
     <ClCompile Include="StartGame.cpp" />
+    <ClCompile Include="SummonMinion.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddTag.h" />
+    <ClInclude Include="CardDisplay.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="DealCard.h" />
     <ClInclude Include="GameState.h" />
@@ -177,17 +194,23 @@
     <ClInclude Include="NetworkingThread.h" />
     <ClInclude Include="NewController.h" />
     <ClInclude Include="OptionRune.h" />
+    <ClInclude Include="PlayCard.h" />
+    <ClInclude Include="PlayMinion.h" />
+    <ClInclude Include="RenderCarePackage.h" />
     <ClInclude Include="ReportMinionToClient.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="RotateTurn.h" />
     <ClInclude Include="Rune.h" />
     <ClInclude Include="RuneVM.h" />
+    <ClInclude Include="sdl_math.h" />
     <ClInclude Include="SetBaseMana.h" />
     <ClInclude Include="SetCurrentController.h" />
     <ClInclude Include="SetMana.h" />
     <ClInclude Include="StartGame.h" />
+    <ClInclude Include="SummonMinion.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\resources\total_border.bmp" />
     <Image Include="card_border.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

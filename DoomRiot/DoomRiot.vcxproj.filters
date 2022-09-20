@@ -69,6 +69,24 @@
     <ClCompile Include="SetCurrentController.cpp">
       <Filter>Source Files\Runes</Filter>
     </ClCompile>
+    <ClCompile Include="RenderCarePackage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CardDisplay.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayCard.cpp">
+      <Filter>Source Files\Runes</Filter>
+    </ClCompile>
+    <ClCompile Include="SummonMinion.cpp">
+      <Filter>Source Files\Runes</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayMinion.cpp">
+      <Filter>Source Files\Runes</Filter>
+    </ClCompile>
+    <ClCompile Include="AddTag.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="json.hpp">
@@ -122,9 +140,33 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="RenderCarePackage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CardDisplay.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sdl_math.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayCard.h">
+      <Filter>Header Files\Runes</Filter>
+    </ClInclude>
+    <ClInclude Include="SummonMinion.h">
+      <Filter>Header Files\Runes</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayMinion.h">
+      <Filter>Header Files\Runes</Filter>
+    </ClInclude>
+    <ClInclude Include="AddTag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="card_border.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\resources\total_border.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

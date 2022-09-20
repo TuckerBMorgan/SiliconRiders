@@ -16,7 +16,7 @@ void GameState::AddMinion(Minion minion) {
 void GameState::DealMinion(unsigned int minion_id, unsigned int controller_id) {
 	for (auto& controller : this->controllers) {
 		if (controller.ControllerId() == controller_id) {
-			controller.MoveMinionToHandFromDeck(minion_id);
+			controller.AddMinionToHand(minion_id);
 		}
 	}
 }
@@ -30,6 +30,15 @@ Controller* GameState::GetLocalPlayer() {
 	}	
 
 	return nullptr;
+}
+
+void GameState::AttemptToPlayCard(unsigned int uid) {
+	auto local_player = this->GetLocalPlayer();
+	if (local_player == nullptr) {
+		return;
+	}
+
+
 }
 
 void GameState::Tick(std::queue<json>& to_server_message) {
@@ -75,3 +84,12 @@ std::ostream& operator << (std::ostream& strm, EGameState tt)
 	return strm << nameTT[(int)tt];
 }
 
+Controller* GameState::GetRemotePlayer() {
+	for (int i = 0; i < this->controllers.size(); i++) {
+		if (this->controllers[i].IsLocal() == false) {
+			return &this->controllers[i];
+		}
+	}
+
+	return nullptr;
+}

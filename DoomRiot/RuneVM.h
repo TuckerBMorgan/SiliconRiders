@@ -9,3 +9,7 @@
 #include "SetMana.h"
 #include "RotateTurn.h"
 #include "OptionRune.h"
+#include "SetCurrentController.h"
+#include "PlayCard.h"
+#include "SummonMinion.h"
+#include "PlayMinion.h"

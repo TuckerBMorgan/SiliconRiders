@@ -33,7 +33,13 @@ std::ostream& operator << (std::ostream& strm, EGameState tt);
 	 void DealMinion(unsigned int minion_id, unsigned int controller_id);
 	 Controller* GetLocalPlayer();
 	 Controller* GetControllerFromUid(unsigned int uid);
+	 Controller* GetRemotePlayer();
 	 void Tick(std::queue<json>& to_server_messages);
+
+	
+
+	 //TODO: move these functions to the cpp file
+	 //TODO: add more logging to each of these files
 	 void SetState(EGameState new_state) {
 		 std::cout << "Changed Game state from " << this->e_game_state << " to " << new_state << std::endl;
 		 this->e_game_state = new_state; 
@@ -60,6 +66,8 @@ std::ostream& operator << (std::ostream& strm, EGameState tt);
 			 this->current_controller = new_current_controller;
 		 }
 	 };
+
+	 void AttemptToPlayCard(unsigned int uid);
 	 
 	 const Minion* GetMinionFromUID(unsigned int uid) {
 		 
