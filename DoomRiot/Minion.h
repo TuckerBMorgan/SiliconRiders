@@ -1,5 +1,8 @@
 #pragma once
-#include<string>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <iostream>
 
 class Minion {
 private:
@@ -18,6 +21,8 @@ private:
 	unsigned int total_health;
 
 	unsigned int controlled_uid;
+
+	std::vector<std::string> tags;
 
 
 
@@ -64,4 +69,18 @@ public:
 	int GetCurrentHealth() const {
 		return this->current_health;
 	};
+
+	void AddTag(std::string tag) {
+		std::cout << "Adding Tag: " << tag << "to minion " << this->id << std::endl;
+		// TODO: this SHOULD be a hashset, a TAG should be an enum that is genned from the code
+		this->tags.push_back(tag);
+	}
+
+	void RemoveTag(std::string tag) {
+		auto index = std::find(this->tags.begin(), this->tags.end(), tag);
+		if (index != this->tags.end()) {
+			std::cout << "Revmoing Tag: " << tag << "from minion " << this->id << std::endl;
+			this->tags.erase(index);
+		}
+	}
 };

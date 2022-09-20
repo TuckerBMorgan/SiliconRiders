@@ -79,5 +79,16 @@ std::ostream& operator << (std::ostream& strm, EGameState tt);
 
 		 return nullptr;
 	 }
+
+	 Minion* GetMutableMinionFromUID(unsigned int uid) {
+
+		 for (auto& minion : this->minions) {
+			 if (minion.UID() == uid) {
+				 return &minion;
+			 }
+		 }
+
+		 return nullptr;
+	 }
 	 
 };
